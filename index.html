@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Kocham Cię Aurela</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="main-body" style="display: none;">
+
+<div id="start-screen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;">
+  <h1>Naciśnij &lt;3</h1>
+  <button onclick="startExperience()" style="padding:15px 30px;font-size:20px;border:none;border-radius:20px;background:#e60073;color:white;cursor:pointer;">Zaczynamy</button>
+</div>
+
+<audio id="bg-music" src="birds.mp3" loop></audio>
+
+<div class="container">
+  <h1>😍 Kliknij myszko </h1>
+  <button class="play-button" onclick="window.open('https://www.youtube.com/watch?v=zxy7ZkfBpZY', '_blank')">▶️ Play</button>
+
+  <div class="text-section">
+    <h2>❤️ Kocham cię </h2>
+    <p>Kochana Aurelciu, jesteś najważniejszą osobą w moim życiu. Gratuluję Ci wszystkiego, co osiągnęłaś. Kocham Cię z całego serca!</p>
+  </div>
+
+  <div class="image-section">
+    <h2>❤️ To my słoneczko</h2>
+    <img src="https://i.pinimg.com/736x/0b/72/7d/0b727d01ab308cd8426f47399392e25b.jpg" alt="Obrazek 1">
+    <img src="https://i.pinimg.com/474x/0a/a2/29/0aa2293845e4e5da48f4e522e501458d.jpg" alt="Obrazek 2" style="margin-top: 20px;">
+  </div>
+
+  <div class="image-section">
+    <h2>🖼️ Nasze wspomnienie</h2>
+    <img src="wspomnienie.jpg" alt="Wspomnienie" style="margin-top: 20px;">
+  </div>
+</div>
+
+<div id="quote" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-style:italic;color:#ffb6c1;text-align:center;"></div>
+
+<script>
+function startExperience() {
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("main-body").style.display = "block";
+
+  const music = document.getElementById("bg-music");
+  if (music) {
+    music.play().catch(() => {
+      console.warn("Muzyka nie wystartowała automatycznie.");
+    });
+  }
+
+  const quotes = [
+    "Miłość to nie patrzenie na siebie, lecz patrzenie razem w tym samym kierunku.",
+    "Każdy dzień z Tobą to najpiękniejszy prezent.",
+    "Jesteś światłem mojego życia.",
+    "Moje serce bije tylko dla Ciebie.",
+    "Z Tobą wszystko ma sens."
+  ];
+  let quoteIndex = 0;
+  document.getElementById("quote").innerText = quotes[quoteIndex];
+  setInterval(() => {
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    document.getElementById("quote").innerText = quotes[quoteIndex];
+  }, 5000);
+
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.position = 'fixed';
+    heart.style.top = Math.random() * 100 + 'vh';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    heart.innerText = '❤️';
+    document.body.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>
